@@ -1,0 +1,23 @@
+lib/
+├── main.dart                # Điểm khởi đầu của ứng dụng
+├── app/                     # Chứa cài đặt chung và khởi tạo
+│   ├── supabase_client.dart # Cấu hình và khởi tạo kết nối Supabase
+│   ├── routes.dart          # Định nghĩa các route
+│   └── theme.dart           # Cấu hình giao diện (màu sắc, fonts)
+├── models/                  # Định nghĩa các model dữ liệu
+│   ├── user_model.dart      # Model cho bảng users
+│   └── product_model.dart   # Model cho bảng products
+├── services/                # Chứa logic tương tác với Supabase
+│   ├── cart_serice.dart     # Service Xử lý login liên quan đến Cart
+│   ├── product_service.dart  # Service xử lý logic liên quan đến bảng Products
+│   └── supabase_service.dart # Service xử lý logic liên quan đến bảng users
+├── repositories/            # Chứa các repository để quản lý dữ liệu
+│   └── user_repository.dart # Repository cho users
+├── controllers/             # Quản lý logic và trạng thái (State Management)
+│   └── user_controller.dart # Controller cho users
+├── views/                   # Chứa các màn hình giao diện
+│   ├── home_screen.dart     # Màn hình chính
+│   ├── user_list_screen.dart # Màn hình danh sách user
+│   └── user_detail_screen.dart # Màn hình chi tiết user
+└── widgets/                 # Các widget dùng chung
+    └── custom_button.dart   # Widget nút bấm tuỳ chỉnh
