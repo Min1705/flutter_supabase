@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:test_supabase/models/product_model.dart';
+import '../models/cart_model.dart';
 import '../services/supabase_service.dart';
-import '../services/cart_service.dart';
 import '../widgets/bottom_navigation_bar.dart';
 import 'product_detail_screen.dart';
 
@@ -30,12 +30,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ShoppingCart spc = ShoppingCart();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Electronics List'),
       ),
-      body: FutureBuilder<List<Map<String, dynamic>>>(
-        future: _supabaseService.getAllProducts(),
+      //      body: FutureBuilder<List<Map<String, dynamic>>>(
+      body: FutureBuilder<List<Product>>(
+        //future: _supabaseService.getAllProducts(),
+        future: _supabaseService.getAllProductModel(),
+
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -50,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
             itemBuilder: (context, index) {
               final product = products[index];
               return GestureDetector(
-                onTap: () => _showProductDetail(product),
+                // onTap: () => _showProductDetail(product.cast<String, >()),
                 child: Card(
                   elevation: 4,
                   margin:
@@ -58,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Row(
                     children: [
                       Image.network(
-                        product['image_url'],
+                        product.imageUrl,
                         width: 100,
                         height: 100,
                         fit: BoxFit.cover,
@@ -68,13 +72,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(product['title'],
+                            Text(product.title,
                                 style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold)),
                             // SizedBox(height: 5),
                             // Text('Description: ${product['description']}'),
                             const SizedBox(height: 5),
-                            Text('Price: \$${product['price']}'),
+                            Text('Price: \$${product.price}'),
                             // SizedBox(height: 5),
                             // Text('Stock: ${product['stock_quantity']}'),
                           ],
@@ -84,7 +88,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           ElevatedButton(
                             onPressed: () {
-                              context.read<CartService>().addToCart(product);
+                              spc.addItemInCart(product as Product, 1);
+
+                              // context.read<CartService>().addToCart(product.cast<String, >());
                             },
                             child: const Text('Add to Cart'),
                           ),

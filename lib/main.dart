@@ -110,8 +110,8 @@ import 'package:test_supabase/services/banner_service.dart';
 import 'package:test_supabase/services/cart_service.dart';
 import 'package:test_supabase/services/register_service.dart';
 import 'package:test_supabase/views/banner_screen.dart';
-import 'package:test_supabase/views/home_screen.dart';
 import 'package:test_supabase/views/cart_screen.dart';
+import 'package:test_supabase/views/home_screen.dart';
 import 'package:test_supabase/views/profile_screen.dart';
 import 'app/supabase_client.dart';
 import 'package:provider/provider.dart';
@@ -174,7 +174,7 @@ class MyApp extends StatelessWidget {
               onTap: (index) {
                 Navigator.popAndPushNamed(context, _getRouteForIndex(index));
               },
-              email: Provider.of<AuthService>(context).email,
+              //email: Provider.of<AuthService>(context).email,
             ),
         '/profile': (context) => ProfileScreen(
               currentIndex: 3,
