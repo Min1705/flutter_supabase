@@ -82,7 +82,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       _buildInfoRow('Full Name', userData['full_name']),
                       _buildInfoRow('Email', userData['email']),
                       _buildInfoRow('Phone Number', userData['phone_number']),
-                      _buildInfoRow('Address', userData['address']),
+                      _buildInfoRow('Address', userData['address']
+                          // Flexible(
+                          //   child: Text(
+                          //     userData['address'] ?? '',
+                          //     maxLines: 3,
+                          //     overflow: TextOverflow.ellipsis,
+                          //   ),
+                          // ),
+                          ),
                       _buildInfoRow('Password', userData['password']),
                     ]),
                     const SizedBox(height: 20),
@@ -90,12 +98,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       width: 200,
                       child: ElevatedButton(
                         onPressed: () {
-                          // Thay đổi đường dẫn đến màn hình chỉnh sửa hồ sơ
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  UpdateProfileScreen(), // Thay thế bằng màn hình chỉnh sửa hồ sơ của bạn
+                              builder: (context) => const UpdateProfileScreen(),
                             ),
                           );
                         },

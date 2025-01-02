@@ -58,12 +58,14 @@ class UserProfile {
   final String address;
   final String phoneNumber;
   final String imgUrl;
+  final String email;
 
   UserProfile({
     required this.fullName,
     required this.address,
     required this.phoneNumber,
     required this.imgUrl,
+    required this.email,
   });
 
   // Hàm chuyển đổi từ JSON sang đối tượng UserProfile
@@ -72,6 +74,7 @@ class UserProfile {
       fullName: json['full_name'] ?? 'Unknown',
       address: json['address'] ?? 'No address',
       phoneNumber: json['phone_number'] ?? 'No phone number',
+      email: json['email'] ?? 'No Email',
       imgUrl: json['imgUrl'] ?? 'default.png',
     );
   }
@@ -82,6 +85,7 @@ class UserProfile {
       'full_name': fullName,
       'address': address,
       'phone_number': phoneNumber,
+      'email': email,
       'imgUrl': imgUrl,
     };
   }
