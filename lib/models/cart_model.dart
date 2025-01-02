@@ -62,7 +62,7 @@ class ShoppingCart {
 
   static double getTotal() {
     return items.fold(
-        0, (sum, item) => sum + item.product.price * item.quantity);
+        0, (sum, item) => sum + item.product.price! * item.quantity);
   }
 
   int getTotalQuantity() {

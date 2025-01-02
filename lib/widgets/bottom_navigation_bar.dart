@@ -26,7 +26,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.search, color: Colors.red),
+          icon: Icon(Icons.view_list, color: Colors.red),
           label: '',
         ),
         BottomNavigationBarItem(

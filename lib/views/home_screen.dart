@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final SupabaseService _supabaseService = SupabaseService();
 
-  void _showProductDetail(Map<String, dynamic> product) {
+  void _showProductDetail(Product product) {
     showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -34,12 +34,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Electronics List'),
+        centerTitle: true,
+        backgroundColor: Colors.teal,
       ),
-      //      body: FutureBuilder<List<Map<String, dynamic>>>(
       body: FutureBuilder<List<Product>>(
-        //future: _supabaseService.getAllProducts(),
         future: _supabaseService.getAllProductModel(),
-
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -54,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
             itemBuilder: (context, index) {
               final product = products[index];
               return GestureDetector(
-                // onTap: () => _showProductDetail(product.cast<String, >()),
+                onTap: () => _showProductDetail(product),
                 child: Card(
                   elevation: 4,
                   margin:
@@ -62,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Row(
                     children: [
                       Image.network(
-                        product.imageUrl,
+                        product.imageUrl ?? '',
                         width: 100,
                         height: 100,
                         fit: BoxFit.cover,
@@ -72,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(product.title,
+                            Text(product.title ?? '',
                                 style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold)),
                             // SizedBox(height: 5),
@@ -89,6 +88,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           ElevatedButton(
                             onPressed: () {
                               spc.addItemInCart(product as Product, 1);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content:
+                                      Text('${product.title} added to cart!'),
+                                  duration: const Duration(
+                                      milliseconds:
+                                          500), // Giảm thời gian hiển thị xuống 1 giây
+                                ),
+                              );
 
                               // context.read<CartService>().addToCart(product.cast<String, >());
                             },

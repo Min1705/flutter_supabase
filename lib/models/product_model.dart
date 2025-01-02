@@ -1,11 +1,11 @@
 class Product {
-  final int id;
-  final String title;
-  final double price;
-  final String description;
-  final String category;
-  final String imageUrl;
-  final int stockQuantity;
+  final int? id;
+  final String? title;
+  final double? price;
+  final String? description;
+  final String? category;
+  final String? imageUrl;
+  final int? stockQuantity;
 
   Product({
     required this.id,

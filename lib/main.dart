@@ -169,7 +169,7 @@ class MyApp extends StatelessWidget {
               },
               bannerService: BannerService(),
             ),
-        '/cart': (context) => CartScreen(
+        '/cart': (context) => ShoppingCartScreen(
               currentIndex: 2,
               onTap: (index) {
                 Navigator.popAndPushNamed(context, _getRouteForIndex(index));

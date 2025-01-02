@@ -5,17 +5,8 @@ import '../models/product_model.dart';
 class SupabaseService {
   final SupabaseClient _client = SupabaseClientInstance.client;
 
-  // Future<List<Map<Product, dynamic>>> getAllProductModel() async {
-  //   final response = await _client.from('products').select();
-  //
-  //   if (response.isEmpty) {
-  //     throw Exception('No data returned from Supabase');
-  //   }
-  //
-  //   return List<Map<Product, dynamic>>.from(response as List);
-  // }
   Future<List<Product>> getAllProductModel() async {
-    final response = await _client.from('products').select().single();
+    final response = await _client.from('products').select();
 
     if (response.isEmpty) {
       throw Exception('No data returned from Supabase');
@@ -24,6 +15,27 @@ class SupabaseService {
     return (response as List<dynamic>)
         .map((json) => Product.fromJson(json as Map<String, dynamic>))
         .toList();
+  }
+
+  Future<List<Product>> getProductByCategoryId(int categoryId) async {
+    try {
+      final response = await _client
+          .from('products')
+          .select('id, title, price, image_url')
+          .eq('category_id', categoryId);
+
+      if (response.isEmpty) {
+        throw Exception("No products found for category ID: $categoryId");
+      }
+
+      // Map the response to a list of Product objects
+      return (response as List)
+          .map((item) => Product.fromJson(item as Map<String, dynamic>))
+          .toList();
+    } catch (e) {
+      print("Error fetching products by category: $e");
+      return [];
+    }
   }
 
   Future<List<Map<String, dynamic>>> getAllProducts() async {

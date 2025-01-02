@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:test_supabase/models/product_model.dart';
+
+import '../models/cart_model.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  final Map<String, dynamic> product;
+  final Product product;
   const ProductDetailScreen({super.key, required this.product});
   @override
   Widget build(BuildContext context) {
+    ShoppingCart spc = ShoppingCart();
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: const BoxDecoration(
@@ -18,20 +22,22 @@ class ProductDetailScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(product['title'],
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+          Text(product.title ?? '',
+              style:
+                  const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
           const SizedBox(height: 10),
-          Text('Description: ${product['description']}',
+          Text('Description: ${product.description}',
               style: const TextStyle(fontSize: 18)),
           const SizedBox(height: 10),
-          Text('Price: \$${product['price']}', style: const TextStyle(fontSize: 18)),
+          Text('Price: \$${product.price}',
+              style: const TextStyle(fontSize: 18)),
           const SizedBox(height: 10),
-          Text('Stock: ${product['stock_quantity']}',
+          Text('Stock: ${product.stockQuantity}',
               style: const TextStyle(fontSize: 18)),
           const SizedBox(height: 20),
           Center(
             child: Image.network(
-              product['image_url'],
+              product.imageUrl ?? '',
               width: 200,
               height: 200,
               fit: BoxFit.cover,
@@ -41,6 +47,16 @@ class ProductDetailScreen extends StatelessWidget {
           Center(
             child: ElevatedButton(
               onPressed: () {
+                spc.addItemInCart(product as Product, 1);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('${product.title} added to cart!'),
+                    duration: const Duration(
+                        milliseconds:
+                            500), // Giảm thời gian hiển thị xuống 1 giây
+                  ),
+                );
+
                 // Thêm logic cho nút Add to Cart ở đây
                 Navigator.pop(context);
               },
