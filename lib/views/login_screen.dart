@@ -81,8 +81,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                   .read<AuthService>()
                                   .login(email, password);
                               if (success) {
-                                Navigator.pushReplacementNamed(
-                                    context, '/home');
+                                await context
+                                    .read<AuthService>()
+                                    .fetchUserData();
+                                Navigator.popAndPushNamed(context, '/home');
+                                //pushReplacementNamed(context, '/home');
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(

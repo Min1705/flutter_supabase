@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/user_model.dart' as customer_user;
 
-class RegisterService {
+class RegisterService with ChangeNotifier {
   final SupabaseClient _client = Supabase.instance.client;
 
   Future<bool> register(customer_user.User user) async {
@@ -16,13 +16,6 @@ class RegisterService {
         'imgUrl': user.imgUrl,
       }
     ]);
-    if (response.error == null) {
-      return true;
-    } else {
-      if (kDebugMode) {
-        print('Error: ${response.error!.message}');
-      }
-      return false;
-    }
+    return true;
   }
 }

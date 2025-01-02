@@ -24,4 +24,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/Electronic.png
+    - assets/AVT/1.jpg
+    - assets/avt/2.jpg
 

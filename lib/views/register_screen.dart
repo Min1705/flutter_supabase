@@ -28,8 +28,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             children: [
               Image.asset(
                 'assets/Electronic.png',
-                width: 300,
-                height: 300,
+                width: 250,
+                height: 250,
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -53,7 +53,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           return null;
                         },
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
@@ -71,7 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           return null;
                         },
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       TextFormField(
                         controller: _phoneNumberController,
                         decoration: InputDecoration(
@@ -89,7 +89,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           return null;
                         },
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       TextFormField(
                         controller: _addressController,
                         decoration: InputDecoration(
@@ -106,7 +106,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           return null;
                         },
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       TextFormField(
                         controller: _passwordController,
                         obscureText: true,
@@ -124,7 +124,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           return null;
                         },
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       _isLoading
                           ? const CircularProgressIndicator()
                           : ElevatedButton(
@@ -135,7 +135,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   });
 
                                   User newUser = User(
-                                    id: 0, // ID có thể được tạo tự động
+                                    id: 0,
+                                    // ID có thể được tạo tự động
                                     email: _emailController.text,
                                     password: _passwordController.text,
                                     fullName: _fullNameController.text,
@@ -152,16 +153,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     _isLoading = false;
                                   });
 
-                                  if (success) {
-                                    Navigator.pushReplacementNamed(
-                                        context, '/home');
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content:
-                                              Text('Email đã được sử dụng')),
-                                    );
-                                  }
+                                  Navigator.popAndPushNamed(context, '/home');
                                 }
                               },
                               style: ElevatedButton.styleFrom(

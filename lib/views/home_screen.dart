@@ -9,7 +9,8 @@ class HomeScreen extends StatefulWidget {
   final int currentIndex;
   final ValueChanged<int> onTap;
 
-  const HomeScreen({super.key, required this.onTap, required this.currentIndex});
+  const HomeScreen(
+      {super.key, required this.onTap, required this.currentIndex});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -52,7 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: () => _showProductDetail(product),
                 child: Card(
                   elevation: 4,
-                  margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   child: Row(
                     children: [
                       Image.network(
