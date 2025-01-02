@@ -9,8 +9,8 @@ class BannerScreen extends StatefulWidget {
   final ValueChanged<int> onTap;
 
   const BannerScreen(
-      {required this.bannerService,
-      super.key,
+      {super.key,
+      required this.bannerService,
       required this.currentIndex,
       required this.onTap});
 

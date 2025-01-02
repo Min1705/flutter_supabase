@@ -23,7 +23,7 @@ class _MainScreenState extends State<MainScreen> {
         Navigator.popAndPushNamed(context, '/home');
         break;
       case 1:
-        Navigator.popAndPushNamed(context, '/search');
+        Navigator.popAndPushNamed(context, '/slideshow');
         break;
       case 2:
         Navigator.pushNamed(context, '/cart');

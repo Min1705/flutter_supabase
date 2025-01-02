@@ -82,15 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       _buildInfoRow('Full Name', userData['full_name']),
                       _buildInfoRow('Email', userData['email']),
                       _buildInfoRow('Phone Number', userData['phone_number']),
-                      _buildInfoRow('Address', userData['address']
-                          // Flexible(
-                          //   child: Text(
-                          //     userData['address'] ?? '',
-                          //     maxLines: 3,
-                          //     overflow: TextOverflow.ellipsis,
-                          //   ),
-                          // ),
-                          ),
+                      _buildInfoRow('Address', userData['address']),
                       _buildInfoRow('Password', userData['password']),
                     ]),
                     const SizedBox(height: 20),

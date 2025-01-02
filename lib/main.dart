@@ -106,8 +106,10 @@ class MyApp extends StatelessWidget {
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:test_supabase/services/auth_service.dart';
+import 'package:test_supabase/services/banner_service.dart';
 import 'package:test_supabase/services/cart_service.dart';
 import 'package:test_supabase/services/register_service.dart';
+import 'package:test_supabase/views/banner_screen.dart';
 import 'package:test_supabase/views/home_screen.dart';
 import 'package:test_supabase/views/cart_screen.dart';
 import 'package:test_supabase/views/profile_screen.dart';
@@ -126,7 +128,6 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (_) => AuthService()),
       ChangeNotifierProvider(create: (_) => CartService()),
       ChangeNotifierProvider(create: (_) => RegisterService()),
-      //ChangeNotifierProvider(create: (_) => ),
     ],
     child: const MyApp(),
   ));
@@ -137,6 +138,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final email = Provider.of<AuthService>(context).email;
+    if (email == null) {
+      print('Email is null');
+    } else {
+      print(email);
+    }
     return MaterialApp(
       title: 'Products List',
       theme: ThemeData(scaffoldBackgroundColor: const Color(0xffffffff)),
@@ -155,11 +162,19 @@ class MyApp extends StatelessWidget {
                 Navigator.popAndPushNamed(context, _getRouteForIndex(index));
               },
             ),
+        '/slideshow': (context) => BannerScreen(
+              currentIndex: 1,
+              onTap: (index) {
+                Navigator.popAndPushNamed(context, _getRouteForIndex(index));
+              },
+              bannerService: BannerService(),
+            ),
         '/cart': (context) => CartScreen(
               currentIndex: 2,
               onTap: (index) {
                 Navigator.popAndPushNamed(context, _getRouteForIndex(index));
               },
+              email: Provider.of<AuthService>(context).email,
             ),
         '/profile': (context) => ProfileScreen(
               currentIndex: 3,

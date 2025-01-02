@@ -3,35 +3,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class UpdateProfileService {
   final SupabaseClient _client = Supabase.instance.client;
-  /*
-  Future<bool> updateUserProfile(String email,
-      String phoneNumber, String address, String password) async {
-    try {
-      final response = await _client
-          .from('customers') // Thay đổi tên bảng nếu cần
-          .update({
-        'full_name': fullName,
-        'phone_number': phoneNumber,
-        'address': address,
-        'password': password
-      })
-          .eq('email', email)
-          .single();
-      if (response != null) {
-        if (kDebugMode) {
-          print('Error updating profile ');
-        }
-        return false;
-      }
-      return true;
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error: $e');
-      }
-      return false; // Xử lý lỗi
-    }
-  }
-*/
   Future<bool> updateUserProfile(String email, UserProfile userProfile) async {
     try {
       final response = await _client
@@ -41,8 +12,8 @@ class UpdateProfileService {
           .single();
       if (kDebugMode) {
         print('Error updating profile ');
+        return false;
       }
-      return false;
       return true;
     } catch (e) {
       if (kDebugMode) {

@@ -9,7 +9,7 @@ class BannerService {
     final response = await _client
         .from('banners')
         .select('url')
-        .limit(5); // Đảm bảo gọi .execute() để thực thi truy vấn
+        .limit(4); // Đảm bảo gọi .execute() để thực thi truy vấn
 
     // Kiểm tra dữ liệu trong response
     if (response.isEmpty) {
